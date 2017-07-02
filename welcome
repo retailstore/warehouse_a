@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<style>	
+		body {
+			font-family: "Lato", sans-serif;
+		}
+		.main {
+			border:2px solid #1E90FF;
+			background-color: rgba(240, 240, 240, 1);
+			height:60%; 
+		 	width:80%;
+		 	padding: 2%;
+		}
+		
+		.message {
+			width:200px;
+			height:20px;
+			background:white;
+			color: #e26012;
+		}
+		
+		.radio {
+			margin-right:25px;
+		}
+		
+		.opt-container {
+			border:2px solid Forestgreen;
+			width:200px;
+			height:20px;
+			background:white; color:#696969;
+		}
+		
+		@media (max-width: 319px) {
+			.opt-container {
+				width: 50%;
+			}
+		}
+		
+		.opt-msg {
+			padding-left: 8px;
+		}
+		tr {
+			margin-bottom: 20px;
+		}
+		td {
+			display: flex;
+			padding-top: .5em;
+			padding-bottom: .5em;
+		}
+		
+		.button {
+			color:white;
+			background: linear-gradient(rgb(71, 180, 245) 5%, hsl(202, 91%, 42%) 100%) rgb(71, 180, 245);
+			width: 90px;
+			height: 40px;
+			white-space:normal;
+			margin: 20px;
+		}
+	</style>
+</head>
+<body>
+		<form id="content">
+			<image src="../images/pglogo.png" id="logo"><br>
+		    <label id="date">Date:- <label id="thetoday"></label></label>
+
+		    <center class="top-padding">
+				<h2>Welcome <span id="name">Mr. Robert</span></h2>
+				<p class="instruction">Please select your option</p>
+				<div>
+					<span class="opt-container" onclick="window.location = 'C_CheckPurchaseOrderStatus.html';"><label class="opt-msg">Check Order Status</label></span>	
+				</div>
+				<br>
+				<div>
+					<span class="opt-container" onclick="window.location = 'D_CreateInvoice.html';"><label class="opt-msg">Goods Receipt Details</label></span>
+				</div>
+				<br>	
+				<div>
+					<span class="opt-container" onclick="window.location = 'E_UpdatePurchaseOrderStatus.html';"><label class="opt-msg">Update Order Status</label></span>
+				</div>
+										
+				<br>
+					<input class="btn-1 btn-blue" onclick="back_login()" type="button" name="opt" value="Go back to Login Page">
+			</center>
+		</form>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script>
+			var month = new Array();
+			month[0] = "January";
+			month[1] = "February";
+			month[2] = "March";
+			month[3] = "April";
+			month[4] = "May";
+			month[5] = "June";
+			month[6] = "July";
+			month[7] = "August";
+			month[8] = "September";
+			month[9] = "October";
+			month[10] = "November";
+			month[11] = "December";
+
+			var date=new Date();
+			var mName = month[date.getMonth()];
+
+			var day=date.getDate();
+			<!-- var month=date.getMonth()+1; -->
+			var year=date.getFullYear();
+			if(day<10)
+				day="0"+day;
+			var today=mName+" "+day+", "+year;
+			document.getElementById("thetoday").innerHTML=String(today);
+			
+			
+			$("#submit").click(function(e){
+				var number_of_checked_checkbox = $("input[name=opt]:checked").length;
+				if(number_of_checked_checkbox == 0){
+					alert("select any one");
+				}
+				else{
+					var option = $('input[name=opt]:checked').val()
+					switch(option) {
+						case "receipt":
+							html = "D_GoodsReceipt.html"
+							break;
+						case "check_staus":
+							html = "C_CheckPurchaseOrderStatus.html"
+							break;
+						case "update_staus":
+							html = "E_UpdatePurchaseOrderStatus.html"
+							break;
+					}
+					$("form").attr('action', html);
+				}
+			});
+			
+			function back_login() {
+				window.location.href = "A_Login.html"
+			}
+		</script>
+	
+</body>
+</html>
